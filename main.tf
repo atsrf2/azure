@@ -61,8 +61,14 @@ resource "azurerm_key_vault" "kv" {
 }
 resource "azurerm_key_vault_secret" "kvsecret" {
   name         = "sql-password"
-  value        = "Akt@2025##"
+  value        = "Akt@2025###"
   key_vault_id = azurerm_key_vault.kv.id
 
   depends_on = [ azurerm_key_vault.kv ]
+  resource time_static name {
+    triggers = {
+      id = value
+    }
+  }
+  
 }
